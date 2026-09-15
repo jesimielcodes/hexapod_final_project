@@ -1,10 +1,21 @@
 ## Introduction to AI Robotics (CS 353) - Final Project 
 
    **Hexapod Maze Solver**
+
+  <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/32011026-a9fd-46de-a910-76484940a530" />
+  <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/1007c161-eceb-4ff2-9ca9-36f77ca1aa7d" />
+
+ 
+
 <img width="1550" height="907" alt="WhatsApp Image 2026-04-22 at 22 04 03" src="https://github.com/user-attachments/assets/147d1c5d-2093-40cf-93fa-4213c4b33fbc" />
 <img width="1600" height="1136" alt="WhatsApp Image 2026-04-22 at 22 03 35" src="https://github.com/user-attachments/assets/1ccb5aa8-556f-4478-99d7-b34ef5e6b121" />
 
+*More media at the bottom*
 ---
+---
+---
+---
+**READ ME**
 
 This repository contains a fully integrated ROS2 ecosystem for a six-legged maze-solving autonomous hexapod robot. The robot is designed in Onshape, exported as URDF, converted to XACRO files, simulated in Gazebo Sim, and controlled via a python nodes using the ros2_control framework.
 
@@ -124,3 +135,10 @@ Hexy primarily navigates using A* path planning on locally generated maps from S
 - Working on current challenges
 - Implementing a depth camera in addition to lidar for depth perception.
 - Hardware Implementation
+
+More media
+ <img width="1600" height="1136" alt="hexapod" src="https://github.com/user-attachments/assets/1453531d-43cd-434d-be04-7f855392f2d6" />
+
+  <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/5634a6c5-267c-43bf-bcfb-b43817db7784" />
+
+  <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/adfa8e0e-d42c-440c-b1de-41603762150b" />
