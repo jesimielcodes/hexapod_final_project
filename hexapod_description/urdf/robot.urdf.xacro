@@ -1,0 +1,429 @@
+<?xml version="1.0" ?>
+<robot name="hexapod" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:property name="base_mass" value="1.0"/>
+  <xacro:property name="base_length" value="0.3"/>
+  <xacro:property name="base_width" value="0.2"/>
+  <xacro:property name="base_height" value="0.1"/>
+
+  <xacro:property name="leg_segment_mass" value="0.9"/>
+  <xacro:property name="leg_connector_mass" value="0.5"/>
+  <xacro:property name="leg_segment_dim" value="0.05"/>
+  
+  <xacro:property name="dummy_mass" value="0.1"/>
+
+  <xacro:macro name="box_inertial" params="mass x y z *origin">
+    <inertial>
+      <xacro:insert_block name="origin"/>
+      <mass value="${mass}"/>
+      <inertia ixx="${(mass/12) * (y*y + z*z)}" ixy="0.0" ixz="0.0"
+               iyy="${(mass/12) * (x*x + z*z)}" iyz="0.0"
+               izz="${(mass/12) * (x*x + y*y)}"/>
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="dummy_inertial">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="${dummy_mass}"/>
+      <inertia ixx="1e-06" ixy="0.0" ixz="0.0" iyy="1e-06" iyz="0.0" izz="1e-06"/>
+    </inertial>
+  </xacro:macro>
+
+  <xacro:include filename="$(find hexapod_description)/urdf/lidar.xacro"/>
+  <xacro:lidar parent_link="part_1"/>
+
+  <link name="part_1">
+    <xacro:box_inertial mass="${base_mass}" x="${base_length}" y="${base_width}" z="${base_height}">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:box_inertial>
+  </link>
+
+  <link name="part_1_2"><xacro:dummy_inertial/></link>
+  <link name="part_1_3"><xacro:dummy_inertial/></link>
+  <link name="part_1_4"><xacro:dummy_inertial/></link>
+  <link name="part_1_5"><xacro:dummy_inertial/></link>
+  <link name="part_1_6"><xacro:dummy_inertial/></link>
+  <link name="part_1_7"><xacro:dummy_inertial/></link>
+  <link name="part_1_8"><xacro:dummy_inertial/></link>
+  <link name="part_1_9"><xacro:dummy_inertial/></link>
+  <link name="part_1_10"><xacro:dummy_inertial/></link>
+  <link name="part_1_11"><xacro:dummy_inertial/></link>
+  <link name="part_1_12"><xacro:dummy_inertial/></link>
+  <link name="part_1_13"><xacro:dummy_inertial/></link>
+  <link name="part_1_14"><xacro:dummy_inertial/></link>
+  <link name="part_1_15"><xacro:dummy_inertial/></link>
+  <link name="part_1_16"><xacro:dummy_inertial/></link>
+  <link name="part_1_17"><xacro:dummy_inertial/></link>
+  <link name="part_1_18"><xacro:dummy_inertial/></link>
+  <link name="part_1_19"><xacro:dummy_inertial/></link>
+
+  <link name="part_1_3_part_1_4">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-3.99804e-05 -0.000637011 -0.00633873" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 -0" rpy="-0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry><material name="part_1_4_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 -0" rpy="-0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_3_part_1_4_fixed" type="fixed"><origin xyz="-0 -0.0618 0.014594" rpy="-1.5708 1.5708 0"/><parent link="part_1_3"/><child link="part_1_3_part_1_4"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_3_part_1_5">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 -0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 -0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_5_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 -0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_3_part_1_5_fixed" type="fixed"><origin xyz="0 -0.015 -0.000905985" rpy="-1.5708 -1.5708 0"/><parent link="part_1_3"/><child link="part_1_3_part_1_5"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_3_part_1_6">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.000220525 -2.39822e-05 -0.0159862" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry><material name="part_1_6_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_3_part_1_6_fixed" type="fixed"><origin xyz="-0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_3"/><child link="part_1_3_part_1_6"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_3_part_1_7">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="3.90557e-05 -2.04383e-05 0.0111455" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="-0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry><material name="part_1_7_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="-0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_3_part_1_7_fixed" type="fixed"><origin xyz="-0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_3"/><child link="part_1_3_part_1_7"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_2_part_1_3">
+    <xacro:box_inertial mass="${leg_segment_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-0.00177507 -0.006 0" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry><material name="part_1_3_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_2_part_1_3_fixed" type="fixed"><origin xyz="0.005 0.04 -0.0145" rpy="-1.5708 -1.5708 0"/><parent link="part_1_2"/><child link="part_1_2_part_1_3"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_7_part_1_12">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-3.99804e-05 -0.000637011 -0.00633873" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 -0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry><material name="part_1_12_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 -0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_7_part_1_12_fixed" type="fixed"><origin xyz="-0 -0.0618 0.014594" rpy="-1.5708 1.5708 0"/><parent link="part_1_7"/><child link="part_1_7_part_1_12"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_7_part_1_13">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.000220525 -2.39822e-05 -0.0159862" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry><material name="part_1_13_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_7_part_1_13_fixed" type="fixed"><origin xyz="0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_7"/><child link="part_1_7_part_1_13"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_7_part_1_14">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="3.90557e-05 -2.04383e-05 0.0111455" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="-0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry><material name="part_1_14_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="-0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_7_part_1_14_fixed" type="fixed"><origin xyz="0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_7"/><child link="part_1_7_part_1_14"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_7_part_1_15">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_15_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_7_part_1_15_fixed" type="fixed"><origin xyz="0 -0.015 -0.000905985" rpy="-1.5708 -1.5708 0"/><parent link="part_1_7"/><child link="part_1_7_part_1_15"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_6_part_1_11">
+    <xacro:box_inertial mass="${leg_segment_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-0.00177507 -0.006 -0" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 -0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry><material name="part_1_11_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 -0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_6_part_1_11_fixed" type="fixed"><origin xyz="0.005 0.04 -0.0145" rpy="-1.5708 -1.5708 0"/><parent link="part_1_6"/><child link="part_1_6_part_1_11"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_5_part_1_9">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_9_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_5_part_1_9_fixed" type="fixed"><origin xyz="-0.00903886 0.0119708 -0.000905985" rpy="2.21754 -1.5708 0"/><parent link="part_1_5"/><child link="part_1_5_part_1_9"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_5_part_1_10">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="-0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_10_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="-0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_5_part_1_10_fixed" type="fixed"><origin xyz="-0.0214086 0.00263061 0.014594" rpy="-1.5708 -0 0.646743"/><parent link="part_1_5"/><child link="part_1_5_part_1_10"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_10_part_1_19">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-3.99804e-05 -0.000637011 -0.00633873" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 -0 -0" rpy="0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry><material name="part_1_19_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 -0 -0" rpy="0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_10_part_1_19_fixed" type="fixed"><origin xyz="-0 -0.0618 0.014594" rpy="-1.5708 1.5708 0"/><parent link="part_1_10"/><child link="part_1_10_part_1_19"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_10_part_1_20">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.000220525 -2.39822e-05 -0.0159862" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry><material name="part_1_20_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_10_part_1_20_fixed" type="fixed"><origin xyz="-0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_10"/><child link="part_1_10_part_1_20"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_10_part_1_21">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_21_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_10_part_1_21_fixed" type="fixed"><origin xyz="0 -0.015 -0.000905985" rpy="-1.5708 -1.5708 0"/><parent link="part_1_10"/><child link="part_1_10_part_1_21"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_10_part_1_22">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="3.90557e-05 -2.04383e-05 0.0111455" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="-0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry><material name="part_1_22_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="-0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_10_part_1_22_fixed" type="fixed"><origin xyz="0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_10"/><child link="part_1_10_part_1_22"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_9_part_1_18">
+    <xacro:box_inertial mass="${leg_segment_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-0.00177507 -0.006 0" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 -0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry><material name="part_1_18_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 -0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_9_part_1_18_fixed" type="fixed"><origin xyz="0.005 0.04 -0.0145" rpy="-1.5708 -1.5708 0"/><parent link="part_1_9"/><child link="part_1_9_part_1_18"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_8_part_1_16">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 -0" rpy="0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_16_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 -0" rpy="0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_8_part_1_16_fixed" type="fixed"><origin xyz="0.00976109 -0.0192346 0.014594" rpy="-1.5708 0 2.80941"/><parent link="part_1_8"/><child link="part_1_8_part_1_16"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_8_part_1_17">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 -0" rpy="-0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_17_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 -0" rpy="-0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_8_part_1_17_fixed" type="fixed"><origin xyz="-0.00489158 -0.01418 -0.000905985" rpy="-1.90298 -1.5708 0"/><parent link="part_1_8"/><child link="part_1_8_part_1_17"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_13_part_1_26">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="3.90557e-05 -2.04383e-05 0.0111455" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 -0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry><material name="part_1_26_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 -0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_13_part_1_26_fixed" type="fixed"><origin xyz="-0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_13"/><child link="part_1_13_part_1_26"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_13_part_1_27">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-3.99804e-05 -0.000637011 -0.00633873" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry><material name="part_1_27_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_13_part_1_27_fixed" type="fixed"><origin xyz="-0 -0.0618 0.014594" rpy="-1.5708 1.5708 0"/><parent link="part_1_13"/><child link="part_1_13_part_1_27"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_13_part_1_28">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.000220525 -2.39822e-05 -0.0159862" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 -0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry><material name="part_1_28_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 -0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_13_part_1_28_fixed" type="fixed"><origin xyz="-0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_13"/><child link="part_1_13_part_1_28"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_13_part_1_29">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 -0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 -0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_29_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 -0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_13_part_1_29_fixed" type="fixed"><origin xyz="0 -0.015 -0.000905985" rpy="-1.5708 -1.5708 0"/><parent link="part_1_13"/><child link="part_1_13_part_1_29"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_12_part_1_25">
+    <xacro:box_inertial mass="${leg_segment_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-0.00177507 -0.006 -0" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 -0 -0" rpy="-0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry><material name="part_1_25_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 -0 -0" rpy="-0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_12_part_1_25_fixed" type="fixed"><origin xyz="0.005 0.04 -0.0145" rpy="-1.5708 -1.5708 0"/><parent link="part_1_12"/><child link="part_1_12_part_1_25"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_11_part_1_23">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 -0" rpy="-0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_23_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 -0" rpy="-0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_11_part_1_23_fixed" type="fixed"><origin xyz="0.0102573 0.0109447 -0.000905985" rpy="0.817807 -1.5708 0"/><parent link="part_1_11"/><child link="part_1_11_part_1_23"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_11_part_1_24">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="-0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_24_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="-0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_11_part_1_24_fixed" type="fixed"><origin xyz="-0.0010522 0.021544 0.014594" rpy="-1.5708 -0 -0.752989"/><parent link="part_1_11"/><child link="part_1_11_part_1_24"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_16_part_1_33">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="3.90557e-05 -2.04383e-05 0.0111455" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry><material name="part_1_33_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_16_part_1_33_fixed" type="fixed"><origin xyz="-0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_16"/><child link="part_1_16_part_1_33"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_16_part_1_34">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 -0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 -0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_34_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 -0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_16_part_1_34_fixed" type="fixed"><origin xyz="-0 -0.015 -0.000905985" rpy="-1.5708 -1.5708 0"/><parent link="part_1_16"/><child link="part_1_16_part_1_34"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_16_part_1_35">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.000220525 -2.39822e-05 -0.0159862" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry><material name="part_1_35_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_16_part_1_35_fixed" type="fixed"><origin xyz="-0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_16"/><child link="part_1_16_part_1_35"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_16_part_1_36">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-3.99804e-05 -0.000637011 -0.00633873" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry><material name="part_1_36_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_16_part_1_36_fixed" type="fixed"><origin xyz="-0 -0.0618 0.014594" rpy="-1.5708 1.5708 0"/><parent link="part_1_16"/><child link="part_1_16_part_1_36"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_15_part_1_32">
+    <xacro:box_inertial mass="${leg_segment_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-0.00177507 -0.006 -0" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="-0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry><material name="part_1_32_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="-0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_15_part_1_32_fixed" type="fixed"><origin xyz="0.005 0.04 -0.0145" rpy="-1.5708 -1.5708 0"/><parent link="part_1_15"/><child link="part_1_15_part_1_32"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_14_part_1_30">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="-0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_30_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="-0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_14_part_1_30_fixed" type="fixed"><origin xyz="0.0139417 0.0055343 -0.000905985" rpy="0.377882 -1.5708 0"/><parent link="part_1_14"/><child link="part_1_14_part_1_30"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_14_part_1_31">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_31_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_14_part_1_31_fixed" type="fixed"><origin xyz="0.00822295 0.0199407 0.014594" rpy="-1.5708 -0 -1.19291"/><parent link="part_1_14"/><child link="part_1_14_part_1_31"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_19_part_1_40">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_40_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_19_part_1_40_fixed" type="fixed"><origin xyz="0 -0.015 -0.000905985" rpy="-1.5708 -1.5708 0"/><parent link="part_1_19"/><child link="part_1_19_part_1_40"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_19_part_1_41">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="3.90557e-05 -2.04383e-05 0.0111455" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry><material name="part_1_41_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__5.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_19_part_1_41_fixed" type="fixed"><origin xyz="0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_19"/><child link="part_1_19_part_1_41"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_19_part_1_42">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-3.99804e-05 -0.000637011 -0.00633873" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry><material name="part_1_42_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__3.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_19_part_1_42_fixed" type="fixed"><origin xyz="-0 -0.0618 0.014594" rpy="-1.5708 1.5708 0"/><parent link="part_1_19"/><child link="part_1_19_part_1_42"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_19_part_1_43">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.000220525 -2.39822e-05 -0.0159862" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="-0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry><material name="part_1_43_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="-0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__4.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_19_part_1_43_fixed" type="fixed"><origin xyz="-0 -0.03 0.014594" rpy="-1.5708 -1.5708 0"/><parent link="part_1_19"/><child link="part_1_19_part_1_43"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_18_part_1_39">
+    <xacro:box_inertial mass="${leg_segment_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="-0.00177507 -0.006 -0" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry><material name="part_1_39_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 -0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__2.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_18_part_1_39_fixed" type="fixed"><origin xyz="0.005 0.04 -0.0145" rpy="-1.5708 -1.5708 0"/><parent link="part_1_18"/><child link="part_1_18_part_1_39"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_17_part_1_37">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_37_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="0 0 -0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_17_part_1_37_fixed" type="fixed"><origin xyz="0.014924 -0.00150826 -0.000905985" rpy="-0.100721 -1.5708 0"/><parent link="part_1_17"/><child link="part_1_17_part_1_37"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_17_part_1_38">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="-0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_38_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="-0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_17_part_1_38_fixed" type="fixed"><origin xyz="0.0164825 0.0139132 0.014594" rpy="-1.5708 0 -1.67152"/><parent link="part_1_17"/><child link="part_1_17_part_1_38"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_4_part_1_8">
+    <xacro:box_inertial mass="${base_mass}" x="0.1" y="0.1" z="0.05"><origin xyz="-2.9e-11 4.21363e-05 0.0203307" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__6.stl"/></geometry><material name="part_1_8_material"><color rgba="0.121569 0.121569 0.121569 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1__6.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_4_part_1_8_fixed" type="fixed"><origin xyz="-0.000689461 -0.0918212 -0.029" rpy="0 0 -2.67995"/><parent link="part_1_4"/><child link="part_1_4_part_1_8"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_part_1">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 0 0" rpy="-0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 0 0" rpy="-0 0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_part_1_fixed" type="fixed"><origin xyz="-0.0481978 -0.0953321 0.029906" rpy="-1.10915 1.5708 0"/><parent link="part_1"/><child link="part_1_part_1"/><axis xyz="0 0 1"/></joint>
+
+  <link name="part_1_part_1_2">
+    <xacro:box_inertial mass="${leg_connector_mass}" x="${leg_segment_dim}" y="${leg_segment_dim}" z="${leg_segment_dim}"><origin xyz="0.0159244 -0 0.0040152" rpy="0 0 0"/></xacro:box_inertial>
+    <visual><origin xyz="0 -0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry><material name="part_1_2_material"><color rgba="0 0 0 1"/></material></visual>
+    <collision><origin xyz="0 -0 0" rpy="0 -0 0"/><geometry><mesh filename="package://hexapod_description/assets/part_1.stl"/></geometry></collision>
+  </link>
+  <joint name="part_1_part_1_2_fixed" type="fixed"><origin xyz="-0.0620752 -0.0884281 0.014406" rpy="1.5708 0 -0.461645"/><parent link="part_1"/><child link="part_1_part_1_2"/><axis xyz="0 0 1"/></joint>
+
+  <joint name="leg0_coxa_joint" type="revolute"><origin xyz="-0.0415164 -0.0819023 0.029" rpy="0 0 2.67995"/><parent link="part_1"/><child link="part_1_4"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-0.5" upper="0.5"/></joint>
+  <joint name="leg0_femur_joint" type="revolute"><origin xyz="-0.0419811 -0.115179 0.014406" rpy="1.5708 -1.54417 1.10915"/><parent link="part_1"/><child link="part_1_2"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+  <joint name="leg0_tibia_joint" type="revolute"><origin xyz="-0.002 0.08 -0.029" rpy="0 0 -1.05154"/><parent link="part_1_2"/><child link="part_1_3"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+
+  <joint name="leg1_coxa_joint" type="revolute"><origin xyz="-0.0743411 -0.0369847 0" rpy="-3.14159 0 -2.67995"/><parent link="part_1_4"/><child link="part_1_11"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-0.5" upper="0.5"/></joint>
+  <joint name="leg1_femur_joint" type="revolute"><origin xyz="0.031026 0.0120383 0.014594" rpy="-1.5708 1.54519 -2.32379"/><parent link="part_1_11"/><child link="part_1_12"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+  <joint name="leg1_tibia_joint" type="revolute"><origin xyz="-0.002 0.08 -0.029" rpy="-0 -0 -1.0472"/><parent link="part_1_12"/><child link="part_1_13"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+
+  <joint name="leg2_coxa_joint" type="revolute"><origin xyz="-0.0758636 -0.12833 0" rpy="-3.14159 -0 -2.67995"/><parent link="part_1_4"/><child link="part_1_14"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-0.5" upper="0.5"/></joint>
+  <joint name="leg2_femur_joint" type="revolute"><origin xyz="0.0331986 -0.00232102 0.014594" rpy="-1.5708 1.40278 -2.76371"/><parent link="part_1_14"/><child link="part_1_15"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+  <joint name="leg2_tibia_joint" type="revolute"><origin xyz="-0.002 0.08 -0.029" rpy="-0 0 -1.0472"/><parent link="part_1_15"/><child link="part_1_16"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+
+  
+  <joint name="leg3_coxa_joint" type="revolute"><origin xyz="0.0737748 -0.0538852 0" rpy="-3.14159 -0.01 -3.67995"/><parent link="part_1_4"/><child link="part_1_5"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-0.5" upper="0.5"/></joint>
+  <joint name="leg3_femur_joint" type="revolute"><origin xyz="-0.00658101 0.0326224 0.014594" rpy="-1.5708 0.49486 -0.924053"/><parent link="part_1_5"/><child link="part_1_6"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+  <joint name="leg3_tibia_joint" type="revolute"><origin xyz="-0.002 0.08 -0.029" rpy="0.01 0 -1.76191"/><parent link="part_1_6"/><child link="part_1_7"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint> 
+
+  <joint name="leg4_coxa_joint" type="revolute"><origin xyz="0.0734326 -0.146168 0" rpy="-3.14159 0 -2.67995"/><parent link="part_1_4"/><child link="part_1_8"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-0.5" upper="0.5"/></joint>
+  <joint name="leg4_femur_joint" type="revolute"><origin xyz="-0.0234016 -0.0236621 0.014594" rpy="-1.5708 1.54389 1.23862"/><parent link="part_1_8"/><child link="part_1_9"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+  <joint name="leg4_tibia_joint" type="revolute"><origin xyz="-0.002 0.08 -0.029" rpy="0 -0 -1.07932"/><parent link="part_1_9"/><child link="part_1_10"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+
+  <joint name="leg5_coxa_joint" type="revolute"><origin xyz="-0.00205293 -0.183722 0" rpy="-3.14159 0 -2.67995"/><parent link="part_1_4"/><child link="part_1_17"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-1" upper="0.5"/></joint>
+  <joint name="leg5_femur_joint" type="revolute"><origin xyz="0.0283994 -0.0173495 0.014594" rpy="-1.5708 1.54503 3.04087"/><parent link="part_1_17"/><child link="part_1_18"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+  <joint name="leg5_tibia_joint" type="revolute"><origin xyz="-0.002 0.08 -0.029" rpy="0 -0 -1.0472"/><parent link="part_1_18"/><child link="part_1_19"/><axis xyz="0 0 1"/><limit effort="100" velocity="10" lower="-3.14" upper="3.14"/></joint>
+
+
+  <ros2_control name="HexapodSystem" type="system">
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+      <param name="position_proportional_gain">5.0</param>
+    </hardware>
+    <joint name="leg0_coxa_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg0_femur_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg0_tibia_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg1_coxa_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg1_femur_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg1_tibia_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg2_coxa_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg2_femur_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg2_tibia_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg3_coxa_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg3_femur_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg3_tibia_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg4_coxa_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg4_femur_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg4_tibia_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg5_coxa_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg5_femur_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+    <joint name="leg5_tibia_joint"><command_interface name="position"/><state_interface name="position"/><state_interface name="velocity"/></joint>
+  </ros2_control>
+
+  <gazebo>
+    <plugin name="gz_ros2_control::GazeboSimROS2ControlPlugin" filename="libgz_ros2_control-system.so">      
+      <parameters>$(find hexapod_control)/config/hexapod_controller.yaml</parameters>  
+    </plugin>
+    <plugin filename="gz-sim-odometry-publisher-system"
+            name="gz::sim::systems::OdometryPublisher">
+      <odom_frame>odom</odom_frame>
+      <robot_base_frame>part_1</robot_base_frame>
+      <odom_topic>/model/hexapod/odometry</odom_topic>
+      <tf_topic>/model/hexapod/tf</tf_topic>
+      <odom_publish_frequency>50</odom_publish_frequency>
+    </plugin>
+  </gazebo>
+
+
+
+</robot>

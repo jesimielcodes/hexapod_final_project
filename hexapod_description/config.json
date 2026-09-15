@@ -1,0 +1,16 @@
+{
+    "documentId": "99c056d98682d455886b789e",
+    "versionId": "",
+    "workspaceId": "81d3c76f252916f10e9cf3e2",
+    "elementId": "bc126908e48eb043eba24927",
+    "outputFormat": "urdf",
+    "packageName": "hexapod_description",
+    "robotName": "hexapod",
+    "assemblyName": "final_assembly",
+    "baseParentLink": "base_link",
+    "drawJoints": true,
+    "useFixedLinks": true,
+    "dynamics": {
+        "fixed": false
+    }
+}

@@ -1,0 +1,5 @@
+hexapod_spawn:
+  x: 0.5
+  y: 0.85
+  z: 1.0
+  yaw: 0.0

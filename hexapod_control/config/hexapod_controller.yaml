@@ -1,0 +1,64 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 1000
+    use_sim_time: true
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    hexapod_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+hexapod_controller:
+  ros__parameters:
+    joints:
+      - leg0_coxa_joint
+      - leg0_femur_joint
+      - leg0_tibia_joint
+      - leg1_coxa_joint
+      - leg1_femur_joint
+      - leg1_tibia_joint
+      - leg2_coxa_joint
+      - leg2_femur_joint
+      - leg2_tibia_joint
+      - leg3_coxa_joint
+      - leg3_femur_joint
+      - leg3_tibia_joint
+      - leg4_coxa_joint
+      - leg4_femur_joint
+      - leg4_tibia_joint
+      - leg5_coxa_joint
+      - leg5_femur_joint
+      - leg5_tibia_joint
+
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+
+    state_publish_rate: 100.0
+    action_monitor_rate: 20.0
+    allow_partial_joints_goal: true
+    open_loop_control: false
+
+
+    gains:
+      leg0_coxa_joint:  {p: 200.0, d: 10.0, i: 0.0}
+      leg0_femur_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg0_tibia_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg1_coxa_joint:  {p: 200.0, d: 10.0, i: 0.0}
+      leg1_femur_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg1_tibia_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg2_coxa_joint:  {p: 200.0, d: 10.0, i: 0.0}
+      leg2_femur_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg2_tibia_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg3_coxa_joint:  {p: 200.0, d: 10.0, i: 0.0}
+      leg3_femur_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg3_tibia_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg4_coxa_joint:  {p: 200.0, d: 10.0, i: 0.0}
+      leg4_femur_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg4_tibia_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg5_coxa_joint:  {p: 200.0, d: 10.0, i: 0.0}
+      leg5_femur_joint: {p: 200.0, d: 10.0, i: 0.0}
+      leg5_tibia_joint: {p: 200.0, d: 10.0, i: 0.0}

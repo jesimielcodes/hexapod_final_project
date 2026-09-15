@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:macro name="lidar" params="parent_link">
+        <joint name="laser_joint" type="fixed">
+            <parent link="${parent_link}"/>
+            <child link="laser_link"/>
+            <origin xyz="0 0 0.055" rpy="0 0 0"/>
+        </joint>
+
+        <link name="laser_link">
+            <inertial>
+                <origin xyz="0 0 0" rpy="0 0 0"/>
+                <mass value="0.2"/>
+                <inertia ixx="1e-5" ixy="0" ixz="0" iyy="1e-5" iyz="0" izz="1e-5"/>
+            </inertial>
+            <visual>
+                <geometry><cylinder length="0.02" radius="0.02"/></geometry>
+                <!-- <material name="black"><color rgba="0 0 0 1"/></material> -->
+            </visual>
+        </link>
+
+        <gazebo reference="laser_link">
+            <sensor name="laser" type="gpu_lidar">
+                <pose>0 0 0 0 0 0</pose>
+                <visualize>true</visualize>
+                <update_rate>10</update_rate>
+                <lidar>
+                    <scan>
+                        <horizontal>
+                            <samples>360</samples>
+                            <resolution>1</resolution>
+                            <min_angle>-3.14159</min_angle>
+                            <max_angle>3.14159</max_angle>
+                        </horizontal>
+                    </scan>
+                    <range>
+                        <min>0.3</min>
+                        <max>50</max>
+                        <resolution>0.01</resolution>
+                    </range>
+                </lidar>
+                <topic>/scan</topic>
+                <gz_frame_id>laser_link</gz_frame_id>
+                <ignoreEntities>
+                    <name>hexapod::part_1</name>
+                    <name>hexapod::part_1_2</name>
+                    <name>hexapod::part_1_3</name>
+                    <name>hexapod::part_1_4</name>
+                    <name>hexapod::part_1_5</name>
+                    <name>hexapod::part_1_6</name>
+                    <name>hexapod::part_1_7</name>
+                    <name>hexapod::part_1_8</name>
+                    <name>hexapod::part_1_9</name>
+                    <name>hexapod::part_1_10</name>
+                    <name>hexapod::part_1_11</name>
+                    <name>hexapod::part_1_12</name>
+                    <name>hexapod::part_1_13</name>
+                    <name>hexapod::part_1_14</name>
+                    <name>hexapod::part_1_15</name>
+                    <name>hexapod::part_1_16</name>
+                    <name>hexapod::part_1_17</name>
+                    <name>hexapod::part_1_18</name>
+                    <name>hexapod::part_1_19</name>
+                    <name>hexapod::part_1_3_part_1_4</name>
+                    <name>hexapod::part_1_3_part_1_5</name>
+                    <name>hexapod::part_1_3_part_1_6</name>
+                    <name>hexapod::part_1_3_part_1_7</name>
+                    <name>hexapod::part_1_4_part_1_8</name>
+                    <name>hexapod::part_1_2_part_1_3</name>
+                    <name>hexapod::part_1_part_1</name>
+                    <name>hexapod::part_1_part_1_2</name>
+                    <name>hexapod::laser_link</name>
+                </ignoreEntities>
+            </sensor>
+        </gazebo>
+    </xacro:macro>
+</robot>
